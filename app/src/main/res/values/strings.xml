@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">TaskUp</string>
+    <string name="my_todo_list">My Todo List</string>
+    <string name="add_new_todo">Add new Todo</string>
+    <string name="alertTitle">"Enter Your Todo: "</string>
+    <string name="alertTitle2">"Enter Description: "</string>
+    <string name="alertTitle3">"Enter Deadline: "</string>
+    <string name="alertTitle4">"Enter Priority: "</string>
+    <string name="task">Task</string>
+    <string name="description">Description</string>
+    <string name="todo_name">Todo Name</string>
+    <string name="enter_new_todo">Enter new Todo</string>
+    <string name="todo_description">Todo Description</string>
+    <string name="enter_description">Enter description</string>
+    <string name="todo_priority">Todo Priority</string>
+    <string name="enter_priority">Enter priority</string>
+    <string name="todo_date">Todo Date</string>
+    <string name="enter_deadline_yyyy_mm_dd">Enter deadline (YYYY-MM-DD)</string>
+    <string name="okay">Okay</string>
+    <string name="cancel">Cancel</string>
 </resources>
