@@ -6,10 +6,9 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.example.taskup.database.DateUtils
 import com.example.taskup.database.Todo
 import com.example.taskup.database.TodoRepository
 import kotlinx.coroutines.CoroutineScope
@@ -39,7 +38,8 @@ class TodoAdapter(initialItems:List<Todo>, repository: TodoRepository,
         val currentItem = items[position]
         holder.descriptionTextView.text = currentItem.description ?: ""
         holder.priorityNumberDecimal.text = currentItem.priority?.toString() ?: ""
-        holder.deadlineTextTime.text = currentItem.deadline?.toString() ?: ""
+        holder.deadlineTextTime.text = DateUtils.formatDateFromLong(currentItem.deadline ?: 0L)
+
         holder.todoCheckBox.text = items[position].item ?: ""
 
         holder.ivDelete.setOnClickListener{

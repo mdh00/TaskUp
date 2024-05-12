@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.example.taskup.database.DateUtils
 import com.example.taskup.database.Todo
 import com.example.taskup.database.TodoDatabase
 import com.example.taskup.database.TodoRepository
@@ -25,10 +26,9 @@ class EditTodoActivity : AppCompatActivity() {
 
         val textViewHeading = findViewById<TextView>(R.id.textViewHeading)
 
-        // Set the text accordingly
-        textViewHeading.text = "Add New Todo"
+        textViewHeading.text = "Edit Todo"
 
-        findViewById<TextView>(R.id.okayBtn).visibility = View.GONE
+        findViewById<TextView>(R.id.saveBtn).visibility = View.GONE
 
         adapter = TodoAdapter(emptyList(), TodoRepository(TodoDatabase.getInstance(this)), MainActivityData())
         viewModel = ViewModelProvider(this).get(MainActivityData::class.java)
@@ -39,7 +39,6 @@ class EditTodoActivity : AppCompatActivity() {
         val description = intent.getStringExtra("description")
         val priority = intent.getIntExtra("priority", 0)
         val deadline = intent.getLongExtra("deadline", 0L)
-        val date = intent.getStringExtra("date")
 
         // Pre-fill edit fields with existing data
         findViewById<EditText>(R.id.editTextTodoItem).setText(item)
@@ -54,6 +53,8 @@ class EditTodoActivity : AppCompatActivity() {
             val newDescription = findViewById<EditText>(R.id.editTextDescription).text.toString()
             val newPriority =
                 findViewById<EditText>(R.id.editTextPriority).text.toString().toIntOrNull() ?: 0
+            val formattedDeadline = DateUtils.formatDateFromLong(deadline)
+            findViewById<EditText>(R.id.editTextDeadline).setText(formattedDeadline)
             val newDeadline =
                 findViewById<EditText>(R.id.editTextDeadline).text.toString().toLongOrNull() ?: 0L
 

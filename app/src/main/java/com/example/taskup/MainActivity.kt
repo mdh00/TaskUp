@@ -1,8 +1,8 @@
 package com.example.taskup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -24,14 +24,16 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: TodoAdapter
     private lateinit var viewModel: MainActivityData
+    private lateinit var repository: TodoRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerView: RecyclerView = findViewById(R.id.todoList)
-        val repository = TodoRepository(TodoDatabase.getInstance(this))
-        viewModel = ViewModelProvider(this)[MainActivityData::class.java]
+        repository = TodoRepository(TodoDatabase.getInstance(this))
+        viewModel = ViewModelProvider(this).get(MainActivityData::class.java)
+
 
         adapter = TodoAdapter(emptyList(), repository, viewModel)
         recyclerView.adapter = adapter
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { newData ->
             adapter.setItems(newData)
         }
+
 
         CoroutineScope(Dispatchers.IO).launch {
             val data = repository.getAllTodoItems()
@@ -50,48 +53,29 @@ class MainActivity : AppCompatActivity() {
 
         val addTodo: Button = findViewById(R.id.addTodo)
         addTodo.setOnClickListener {
-            displayAlert(repository)
+            //displayAlert(repository)
+            startActivity(Intent(this@MainActivity, AddTodoActivity::class.java))
         }
     }
 
-    private fun displayAlert(repository: TodoRepository) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.activity_add_todo, null)
-        val builder = AlertDialog.Builder(this).apply {
-            setView(dialogView)
-            setTitle("Create New Todo")
-            setPositiveButton("OK") { dialog, _ ->
-                val itemEditText = dialogView.findViewById<EditText>(R.id.editTextTodoItem)
-                val descriptionEditText = dialogView.findViewById<EditText>(R.id.editTextDescription)
-                val priorityEditText = dialogView.findViewById<EditText>(R.id.editTextPriority)
-                val deadlineEditText = dialogView.findViewById<EditText>(R.id.editTextDeadline)
-                deadlineEditText.inputType = InputType.TYPE_CLASS_TEXT
-                deadlineEditText.hint = "YYYY-MM-DD"
 
-                Log.d("entered date", "New data received: $deadlineEditText")
 
-                val newItem = itemEditText.text.toString()
-                val newDescription = descriptionEditText.text.toString()
-                val newPriority = priorityEditText.text.toString().toIntOrNull()
-                val newDeadline = deadlineEditText.inputType.toString().toLongOrNull()
-
-                Log.d("new date", "New data received: $newDeadline")
-
-                if (newItem.isNotBlank()) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        repository.insert(Todo(newItem, newDescription, newPriority, newDeadline))
-                        val data = repository.getAllTodoItems()
-                        withContext(Dispatchers.Main) {
-                            viewModel.setData(data)
-                        }
-                    }
-                } else {
-                    Toast.makeText(this@MainActivity, "Todo item cannot be empty", Toast.LENGTH_SHORT).show()
+    override fun onResume() {
+        super.onResume()
+        Log.d("MainActivity", "onResume called")
+        // Check if repository is initialized
+        if (::repository.isInitialized) {
+            // Refresh data when the activity resumes
+            CoroutineScope(Dispatchers.IO).launch {
+                val data = repository.getAllTodoItems()
+                withContext(Dispatchers.Main) {
+                    viewModel.setData(data)
                 }
             }
-            setNegativeButton("Cancel") { dialog, _ ->
-                dialog.cancel()
-            }
+        } else {
+            // Log an error or handle the uninitialized state appropriately
+            Log.e("MainActivity", "Repository is not initialized")
         }
-        builder.create().show()
     }
+
 }
