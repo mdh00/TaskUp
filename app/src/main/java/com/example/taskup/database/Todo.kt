@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-public class Todo (
+class Todo (
     var item: String?,
     var description: String?,
     var priority: Int?,

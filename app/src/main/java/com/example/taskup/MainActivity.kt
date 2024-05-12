@@ -58,45 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayAlert(repository: TodoRepository) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.activity_add_todo, null)
-        val builder = AlertDialog.Builder(this).apply {
-            setView(dialogView)
-            setTitle("Create New Todo")
-            setPositiveButton("OK") { dialog, _ ->
-                val itemEditText = dialogView.findViewById<EditText>(R.id.editTextTodoItem)
-                val descriptionEditText = dialogView.findViewById<EditText>(R.id.editTextDescription)
-                val priorityEditText = dialogView.findViewById<EditText>(R.id.editTextPriority)
-                val deadlineEditText = dialogView.findViewById<EditText>(R.id.editTextDeadline)
 
-                val newDeadlineText = deadlineEditText.text.toString()
-                val newDeadline = newDeadlineText.toLongOrNull() ?: 0L
-
-                Log.d("entered date", "New data received: $deadlineEditText")
-
-                val newItem = itemEditText.text.toString()
-                val newDescription = descriptionEditText.text.toString()
-                val newPriority = priorityEditText.text.toString().toIntOrNull()
-
-                if (newItem.isNotBlank()) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        repository.insert(Todo(newItem, newDescription, newPriority, newDeadline))
-                        val data = repository.getAllTodoItems()
-                        withContext(Dispatchers.Main) {
-                            viewModel.setData(data)
-                        }
-                    }
-                } else {
-                    Toast.makeText(this@MainActivity, "Todo item cannot be empty", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            setNegativeButton("Cancel") { dialog, _ ->
-                dialog.cancel()
-            }
-        }
-        builder.create().show()
-    }
 
     override fun onResume() {
         super.onResume()
