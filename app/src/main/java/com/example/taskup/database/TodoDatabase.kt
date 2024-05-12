@@ -34,8 +34,16 @@ abstract class TodoDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE Todo ADD COLUMN description TEXT")
                 database.execSQL("ALTER TABLE Todo ADD COLUMN priority INTEGER DEFAULT 0")
                 database.execSQL("ALTER TABLE Todo ADD COLUMN deadline INTEGER DEFAULT 0")
+
             }
         }
 
-    }
+//        private val migration2to3 = object : Migration(2, 3) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                database.execSQL("ALTER TABLE Todo DROP COLUMN deadline")
+//                database.execSQL("ALTER TABLE Todo ADD COLUMN deadline TEXT")
+//            }
+//        }
+
+        }
 }

@@ -1,5 +1,6 @@
 package com.example.taskup
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ class MainActivityData: ViewModel() {
     val data: LiveData<List<Todo>> = _data
     fun setData(data:List<Todo>){
         _data.value = data
+        Log.d("MainActivityData", "New data received: $data")
     }
 
 }

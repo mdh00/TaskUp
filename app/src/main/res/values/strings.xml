@@ -15,7 +15,10 @@
     <string name="todo_priority">Todo Priority</string>
     <string name="enter_priority">Enter priority</string>
     <string name="todo_date">Todo Date</string>
-    <string name="enter_deadline_yyyy_mm_dd">Enter deadline (YYYY-MM-DD)</string>
-    <string name="okay">Okay</string>
+    <string name="enter_deadline_yyyy_mm_dd">Enter deadline</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
     <string name="cancel">Cancel</string>
+    <string name="_2024_05_12">2024-05-12</string>
+    <string name="heading">Heading</string>
 </resources>

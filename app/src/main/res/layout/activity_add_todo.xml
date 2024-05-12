@@ -1,96 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#EAC2F1"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ViewTodoItem"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/todo_name" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editTextTodoItem"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/enter_new_todo"
-        android:inputType="text" />
+        <TextView
+            android:id="@+id/textViewHeading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/heading"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/ViewDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/todo_description" />
-
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/enter_description"
-        android:inputType="text" />
-
-    <TextView
-        android:id="@+id/ViewPriority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/todo_priority" />
-
-    <EditText
-        android:id="@+id/editTextPriority"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/enter_priority"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/ViewDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/todo_date" />
-
-    <EditText
-        android:id="@+id/editTextDeadline"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/enter_deadline_yyyy_mm_dd"
-        android:inputType="date" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/cancelbtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/black"
-            android:text="@string/okay"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/okbtn"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/okbtn"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/ViewTodoItem"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/design_default_color_error"
-            android:text="@string/cancel"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cancelbtn"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="@string/todo_name"
+            android:textSize="18sp" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/editTextTodoItem"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/enter_new_todo"
+            android:inputType="text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/ViewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/todo_description"
+            android:textSize="18sp"
+            />
+
+
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:autofillHints="Describe your Todo"
+            android:hint="@string/enter_description"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/ViewPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/todo_priority"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editTextPriority"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/enter_priority"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/ViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/todo_date"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editTextDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/enter_deadline_yyyy_mm_dd"
+            android:inputType="date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/saveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="@color/black"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/okayBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/black"
+                android:text="@string/update" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
