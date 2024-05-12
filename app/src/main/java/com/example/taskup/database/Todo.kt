@@ -2,7 +2,6 @@ package com.example.taskup.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity
 public class Todo (
@@ -22,4 +21,12 @@ public class Todo (
     override fun toString(): String {
         return "Todo(id=$id, item=$item, description=$description, priority=$priority, deadline=$deadline)"
     }
+
+//    companion object {
+//        fun formatDateFromLong(timeInMillis: Long): String {
+//            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+//            val date = Date(timeInMillis)
+//            return sdf.format(date)
+//        }
+//    }
 }
